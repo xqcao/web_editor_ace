@@ -1,0 +1,19 @@
+{
+    "name": "my-application",
+    "version": "0.0.1",
+    "description": "acejs web",
+    "private": true,
+    "dependencies": {
+        "jquery": "latest",
+        "ace": "^1.2.6",
+        "bootstrap": "^3.3.7",
+        "js-beautify": "^1.6.12"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}

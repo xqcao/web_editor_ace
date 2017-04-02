@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ACE demo</title>
+    <!-- <script src="https://cdn.jsdelivr.net/ace/1.2.6/min/ace.js"></script> -->
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/ace/min/ace.js"></script>
+    <script type="text/javascript" src="bower_components/ace/min/ext-beautify.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <!-- <script type="text/javascript" src="ace/min/ext-language_tools.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.6.8/beautify.js"></script> -->
+    <script type="text/javascript" src="bower_components/js-beautify/js/lib/beautify.js"></script>
+    <script type="text/javascript" src="bower_components/js-beautify/js/lib/beautify-html.js"></script>
+    <script type="text/javascript" src="bower_components/js-beautify/js/lib/beautify-css.js"></script>
+    <style type="text/css" media="screen">
+        #smyles_editor {
+            height: 300px;
+            /*width: 80%;*/
+        }
+        
+        #editor_wrap {
+            background-color: #cccccc;
+            border-bottom: 1px solid #222222;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>formating Javascript,HTML,JSON,CSS</h2>
+        <div id="editor_wrap">
+
+
+            <div id="smyles_editor">
+                <!--
+          function foo()(item){ var x = "hello 123 world"; return x; } {"glossary": {"title": "example glossary","GlossDiv": {"title": "S","GlossList": {"GlossEntry": {"ID": "SGML","SortAs": "SGML","GlossTerm": "Standard Generalized Markup Language","Acronym":
+            "SGML","Abbrev": "ISO 8879:1986","GlossDef": {"para": "A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso": ["GML", "XML"]},"GlossSee": "markup"}}}}}
+-->
+            </div>
+            <div id="smyles_dragbar"></div>
+
+        </div>
+        <br />
+        <br>
+        <div class="">
+            <button type="button" name="button" class="btn btn-primary" onclick="dobeautify()">Javascript beautify</button>
+            <button type="button" name="button" class="btn btn-primary" onclick="dojsformat()">Javascript format</button>
+            <button type="button" name="button" class="btn btn-primary" onclick="dohtmlformat()">HTML format</button>
+            <button type="button" name="button" class="btn btn-primary" onclick="docssformat()">CSS format</button>
+            <button type="button" class="btn btn-warning" onclick="docancel();">Cancel</button>
+        </div>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/ace/1.2.6/min/ext-beautify.js"></script> -->
+    <script type="text/javascript">
+        // ace.require("ace/ext/language_tools");
+        var editor = ace.edit('smyles_editor');
+
+        function docancel() {
+            editor.setValue('');
+
+        }
+
+
+        // editor.setOptions({
+        //     enableBasicAutocompletion: true
+        // });
+
+        editor.setTheme('ace/theme/github');
+        editor.$blockScrolling = Infinity;
+        // editor.setAutoScrollEditorIntoView(true);
+        // editor.resize();
+        // window.dragging = false;
+        function dobeautify() {
+            editor.getSession().setMode('ace/modo/javascript');
+            //  editor.$blockScrolling = Infinity;
+            var beautify = ace.require("ace/ext/beautify"); // get reference to extension
+            // console.log(beautify.beautify(editor.session));
+            // var editor = ace.edit("smyles_editor"); // get reference to editor
+
+            beautify.beautify(editor.session);
+        }
+        var jsbOpts = {
+            indent_size: 4
+        };
+
+        function dojsformat() {
+            editor.getSession().setMode("ace/mode/json");
+            editor.setValue(js_beautify(editor.getSession().getValue(), jsbOpts));
+        }
+
+        function dohtmlformat() {
+            editor.getSession().setMode("ace/mode/html");
+            // var beautify = ace.require("ace/ext/beautify"); // get reference to extension
+            // beautify.beautify(editor.session);
+            editor.setValue(html_beautify(editor.getSession().getValue(), jsbOpts));
+        }
+
+        function docssformat() {
+            editor.getSession().setMode("ace/mode/json");
+            editor.setValue(css_beautify(editor.getSession().getValue(), jsbOpts));
+        }
+
+    </script>
+</body>
+
+</html>
